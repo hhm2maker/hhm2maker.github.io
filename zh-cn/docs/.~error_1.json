@@ -1,0 +1,6 @@
+{
+  "filename": ".~error_1.md",
+  "__html": "<h1>System.InvalidOperationException</h1>\n<p>此实现不是 Windows 平台 FIPS 验证的加密算法的一部分</p>\n<h3>解决办法：</h3>\n<ol>\n<li>Win键+R 输入 regedit 打开注册表编辑器</li>\n<li>对于Vista、Win7、Win8、Win10 用户，请定位到： HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Lsa\\FIPSAlgorithmPolicy\\Enabled  <s>对于Windows XP用户，请定位到：HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Lsa\\FIPSAlgorithmPolicy</s> (Windows XP无法使用该软件)</li>\n<li>右键-&gt;修改 将值修改为默认值0</li>\n<li>退出注册表编辑器,重启软件</li>\n</ol>\n",
+  "link": "\\zh-cn\\docs\\.~error_1.html",
+  "meta": {}
+}

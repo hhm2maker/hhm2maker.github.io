@@ -1,0 +1,6 @@
+{
+  "filename": "writing_blog_logic.md",
+  "__html": "<h1>编写博客逻辑</h1>\n<p>当你创建完你的界面，你需要</p>\n<ul>\n<li>编写指定的逻辑（DLL文件）</li>\n<li>选择别人编写好的DLL</li>\n</ul>\n<p>来完成你的后续操作。</p>\n<p>例如：Maker已经提供了安装在线第三方编辑方法的DLL文件，所以你只需要创建博客界面即可完成所有的操作。</p>\n<p><strong>那么我们接下来就介绍如果编写指定格式的DLL应该如何操作</strong></p>\n<p>更为详细的全程请参考灯光语句自定义编辑方法：\naa</p>\n<p>以下地方需要更改：</p>\n<blockquote>\n<p>三、编写dll文件 - ③右键引用-添加引用 - 在弹出的对话框中，选择-软件根目录Operation.dll文件</p>\n</blockquote>\n<p>这里改为 选择-软件根目录Blog.dll文件。</p>\n<blockquote>\n<p>④继承IGetOperationResult并实现IGetOperationResult接口中的方法</p>\n</blockquote>\n<p>这里改为 继承IToBlog并实现IToBlog接口中的方法</p>\n",
+  "link": "\\zh-cn\\docs\\writing_blog_logic.html",
+  "meta": {}
+}

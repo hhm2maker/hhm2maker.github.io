@@ -1,0 +1,136 @@
+{
+  "en-us": [
+    {
+      "filename": "blog1.md",
+      "link": "\\en-us\\blog\\blog1.html",
+      "meta": {
+        "key1": "hello",
+        "key2": "world"
+      }
+    },
+    {
+      "filename": "blog2.md",
+      "link": "\\en-us\\blog\\blog2.html",
+      "meta": {
+        "key1": "hello",
+        "key2": "world"
+      }
+    },
+    {
+      "filename": "blog3.md",
+      "link": "\\en-us\\blog\\blog3.html",
+      "meta": {
+        "key1": "hello",
+        "key2": "world"
+      }
+    },
+    {
+      "filename": "blog4.md",
+      "link": "\\en-us\\blog\\blog4.html",
+      "meta": {
+        "key1": "hello",
+        "key2": "world"
+      }
+    },
+    {
+      "filename": "blog5.md",
+      "link": "\\en-us\\blog\\blog5.html",
+      "meta": {
+        "key1": "hello",
+        "key2": "world"
+      }
+    },
+    {
+      "filename": "blog6.md",
+      "link": "\\en-us\\blog\\blog6.html",
+      "meta": {
+        "key1": "hello",
+        "key2": "world"
+      }
+    },
+    {
+      "filename": "blog7.md",
+      "link": "\\en-us\\blog\\blog7.html",
+      "meta": {
+        "key1": "hello",
+        "key2": "world"
+      }
+    }
+  ],
+  "zh-cn": [
+    {
+      "filename": "blog1.md",
+      "link": "\\zh-cn\\blog\\blog1.html",
+      "meta": {
+        "title": "起源",
+        "keywords": "keywords1,keywords2,keywords3"
+      }
+    },
+    {
+      "filename": "blog2.md",
+      "link": "\\zh-cn\\blog\\blog2.html",
+      "meta": {
+        "key1": "hello",
+        "key2": "world"
+      }
+    },
+    {
+      "filename": "blog3.md",
+      "link": "\\zh-cn\\blog\\blog3.html",
+      "meta": {
+        "key1": "hello",
+        "key2": "world"
+      }
+    },
+    {
+      "filename": "blog4.md",
+      "link": "\\zh-cn\\blog\\blog4.html",
+      "meta": {
+        "key1": "hello",
+        "key2": "world"
+      }
+    },
+    {
+      "filename": "blog5.md",
+      "link": "\\zh-cn\\blog\\blog5.html",
+      "meta": {
+        "key1": "hello",
+        "key2": "world"
+      }
+    },
+    {
+      "filename": "blog6.md",
+      "link": "\\zh-cn\\blog\\blog6.html",
+      "meta": {
+        "key1": "hello",
+        "key2": "world"
+      }
+    },
+    {
+      "filename": "blog7.md",
+      "link": "\\zh-cn\\blog\\blog7.html",
+      "meta": {
+        "key1": "hello",
+        "key2": "world"
+      }
+    },
+    {
+      "filename": "C#笔记.md",
+      "link": "\\zh-cn\\blog\\C#笔记.html",
+      "meta": {
+        "title": "C#笔记",
+        "date": "2019-08-07 09:23:00",
+        "categories": "[CSharp]"
+      }
+    },
+    {
+      "filename": "CSharp规范.md",
+      "link": "\\zh-cn\\blog\\CSharp规范.html",
+      "meta": {
+        "title": "C#规范",
+        "date": "2019-08-05 09:23:00",
+        "categories": "[CSharp]"
+      }
+    }
+  ]
+}

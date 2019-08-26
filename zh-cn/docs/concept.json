@@ -1,0 +1,6 @@
+{
+  "filename": "concept.md",
+  "__html": "<h1>概念</h1>\n<p>在制作灯光之前，我们先要了解一些概念，这样会使得你的制作逻辑更清晰可更改性更强。</p>\n<table>\n<thead>\n<tr>\n<th>名词</th>\n<th>解释</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>基类(基层)</td>\n<td>最基础的单位是组成框架的一部分。</td>\n</tr>\n<tr>\n<td>子类(派生类)</td>\n<td>由基类衍生出来的类。</td>\n</tr>\n<tr>\n<td>框架</td>\n<td>由许多基类和子类组成的类。</td>\n</tr>\n<tr>\n<td>成品</td>\n<td>对框架进行上色等操作形成的成品。</td>\n</tr>\n</tbody>\n</table>\n<p>以上的概念都是相对的，</p>\n<p>比如：对一个整pad的灯光来说，左下左上右下右上可以被认为是4个基类，整个pad为框架；对于左下这个区域，每一行认为是1个基类，那么左下这个区域也可以被认为是一个框架。</p>\n",
+  "link": "\\zh-cn\\docs\\concept.html",
+  "meta": {}
+}

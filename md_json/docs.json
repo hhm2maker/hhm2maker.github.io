@@ -1,0 +1,111 @@
+{
+  "en-us": [
+    {
+      "filename": "demo1.md",
+      "link": "\\en-us\\docs\\demo1.html",
+      "meta": {}
+    },
+    {
+      "filename": "demo2.md",
+      "link": "\\en-us\\docs\\demo2.html",
+      "meta": {}
+    },
+    {
+      "filename": "demo3.md",
+      "link": "\\en-us\\docs\\dir\\demo3.html",
+      "meta": {}
+    }
+  ],
+  "zh-cn": [
+    {
+      "filename": "blog_concept.md",
+      "link": "\\zh-cn\\docs\\blog_concept.html",
+      "meta": {}
+    },
+    {
+      "filename": "case_blockmoving.md",
+      "link": "\\zh-cn\\docs\\case_blockmoving.html",
+      "meta": {}
+    },
+    {
+      "filename": "case_diffusion.md",
+      "link": "\\zh-cn\\docs\\case_diffusion.html",
+      "meta": {}
+    },
+    {
+      "filename": "color.md",
+      "link": "\\zh-cn\\docs\\color.html",
+      "meta": {}
+    },
+    {
+      "filename": "creating_blog_interface.md",
+      "link": "\\zh-cn\\docs\\creating_blog_interface.html",
+      "meta": {}
+    },
+    {
+      "filename": "demo2.md",
+      "link": "\\zh-cn\\docs\\demo2.html",
+      "meta": {}
+    },
+    {
+      "filename": "demo3.md",
+      "link": "\\zh-cn\\docs\\demo3.html",
+      "meta": {}
+    },
+    {
+      "filename": "demo3.md",
+      "link": "\\zh-cn\\docs\\dir\\demo3.html",
+      "meta": {}
+    },
+    {
+      "filename": "document.md",
+      "link": "\\zh-cn\\docs\\document.html",
+      "meta": {}
+    },
+    {
+      "filename": "error_1.md",
+      "link": "\\zh-cn\\docs\\error_1.html",
+      "meta": {}
+    },
+    {
+      "filename": "file.md",
+      "link": "\\zh-cn\\docs\\file.html",
+      "meta": {}
+    },
+    {
+      "filename": "install.md",
+      "link": "\\zh-cn\\docs\\install.html",
+      "meta": {}
+    },
+    {
+      "filename": "lightscript_concept.md",
+      "link": "\\zh-cn\\docs\\lightscript_concept.html",
+      "meta": {}
+    },
+    {
+      "filename": "money.md",
+      "link": "\\zh-cn\\docs\\money.html",
+      "meta": {}
+    },
+    {
+      "filename": "position.md",
+      "link": "\\zh-cn\\docs\\position.html",
+      "meta": {}
+    },
+    {
+      "filename": "single_editing_method.md",
+      "link": "\\zh-cn\\docs\\single_editing_method.html",
+      "meta": {}
+    },
+    {
+      "filename": "update.md",
+      "link": "\\zh-cn\\docs\\update.html",
+      "meta": {}
+    },
+    {
+      "filename": "writing_blog_logic.md",
+      "link": "\\zh-cn\\docs\\writing_blog_logic.html",
+      "meta": {}
+    }
+  ]
+}

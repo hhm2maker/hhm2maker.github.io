@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="keywords" content=".~single_editing_method" />
+	<meta name="description" content=".~single_editing_method" />
+	<!-- 网页标签标题 -->
+	<title>.~single_editing_method</title>
+	<link rel="shortcut icon" href="/img/docsite.ico"/>
+	<link rel="stylesheet" href="/build/documentation.css" />
+</head>
+<body>
+	<div id="root"><div class="documentation-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="/img/dubbo_colorful.png"/></a><div class="search search-normal"><span class="icon-search"></span></div><span class="language-switch language-switch-normal">En</span><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/><ul><li class="menu-item menu-item-normal"><a href="/zh-cn/index.html" target="_self">首页</a></li><li class="menu-item menu-item-normal menu-item-normal-active"><a href="/zh-cn/docs/demo1.html" target="_self">文档</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/blog/index.html" target="_self">博客</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/community/index.html" target="_self">社区</a></li></ul></div></div></header><div class="bar"><div class="bar-body"><img src="/img/system/docs.png" class="front-img"/><span>文档</span><img src="/img/system/docs.png" class="back-img"/></div></div><section class="content-section"><div class="sidemenu"><div class="sidemenu-toggle"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png"/></div><ul><li class="menu-item menu-item-level-1"><span>准备开始</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/install.html" target="_self">安装</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/demo2.html" target="_self">示例2</a></li><li style="height:72px;overflow:hidden" class="menu-item menu-item-level-2"><span>目录<img style="transform:rotate(0deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/dir/demo3.html" target="_self">示例3</a></li></ul></li></ul></li></ul></div><div class="doc-content markdown-body"><h1>单编辑方法</h1>
+<p>本文档将介绍如何自定义编辑方法。</p>
+<blockquote>
+<p>该编辑方法仅供测试，正式版可能会进行调整。</p>
+</blockquote>
+<blockquote>
+<p>适用人群：会编写Dynamic Link Library(即.dll)文件的人员。</p>
+</blockquote>
+<p>新建一个文件夹。</p>
+<h1>一、配置安装文件</h1>
+<p>新建一个.xml后缀的文件。(推荐文件名：setup.xml)</p>
+<p>打开(用编辑文本文件的软件打开即可，如记事本)。</p>
+<p>拷贝下面的内容：</p>
+<p>setup.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;Setup&gt; 
+  &lt;Operations&gt; 
+    &lt;Operation&gt; 
+      &lt;Name&gt;&lt;/Name&gt;  
+      &lt;Text&gt;&lt;/Text&gt;  
+      &lt;View&gt;&lt;/View&gt;  
+      &lt;Dll&gt;&lt;/Dll&gt; 
+    &lt;/Operation&gt; 
+  &lt;/Operations&gt; 
+&lt;/Setup&gt;
+</code></pre>
+<p>然后对复制的内容进行修改：</p>
+<p>Name：操作名称，保证其唯一性，且与之后的dll文件命名空间后半部分相同(后文有详细介绍)。</p>
+<p>Text：语言为英文时显示的文本。</p>
+<p>View：视图xml文件路径，不需要额外参数是可为空即(view=””)。</p>
+<p>Dll：dll文件路径。</p>
+<p>setup.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;Setup&gt; 
+  &lt;Operations&gt; 
+    &lt;Operation&gt; 
+      &lt;Name&gt;ChangeThePosition&lt;/Name&gt;  
+      &lt;Text&gt;改变位置&lt;/Text&gt;  
+      &lt;View&gt;ChangeThePosition&lt;/View&gt;  
+      &lt;Dll&gt;sample&lt;/Dll&gt; 
+    &lt;/Operation&gt; 
+  &lt;/Operations&gt; 
+&lt;/Setup&gt;
+</code></pre>
+<p>此时，保存setup.xml文件，</p>
+<p><strong>保存的编码为UTF-8</strong></p>
+<p>打开Maker.exe ，侧栏-第三方，点击<img src="https://firebasestorage.googleapis.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-LU-oxMWYc64m9DG-B71%2F-LcLY_qIE_2mP9_ccRA2%2F-LcLoj3NMZow3kRvqGsE%2Fsetup.png?alt=media&amp;token=a90707e0-a847-49a9-b59d-d4131b7378ab" alt="img">(安装编辑插件) 下如下图：</p>
+<p><img src="https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-LU-oxMWYc64m9DG-B71%2F-LcLY_qIE_2mP9_ccRA2%2F-LcLy7FgAMEChY_8K_uI%2F%E6%97%A0%E6%A0%87%E9%A2%98CCC.png?alt=media&amp;token=d5fdd515-92f8-4aef-b63a-5b391cd79d52" alt="img"></p>
+<p>点击安装</p>
+<h1>二、配置视图文件</h1>
+<p>如果你不需要得到额外的参数，那么可以跳过此步骤(如水平翻转)。</p>
+<p>新建一个.xml后缀的文件。(必须与setup.xml文件内View对应)</p>
+<p>如上面</p>
+<p>setup.xml</p>
+<pre><code> &lt;View&gt;ChangeThePosition&lt;/View&gt;  
+</code></pre>
+<p>那么该文件名应为：ChangeThePosition.xml</p>
+<p>拷贝下面的内容：</p>
+<p>ChangeThePosition.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;Views&gt; 
+  &lt;View type=&quot;textblock&quot; text=&quot;参数1&quot;&gt; 
+  &lt;View type=&quot;textbox&quot;/&gt; 
+  &lt;View type=&quot;textblock&quot; text=&quot;参数2：&quot;/&gt; 
+  &lt;View type=&quot;textbox&quot;/&gt; 
+&lt;/Views&gt;
+</code></pre>
+<p>根据你的需求(即想要获取什么额外参数来配置该文件)。</p>
+<table>
+<thead>
+<tr>
+<th>名词</th>
+<th>解释</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>控件类型</td>
+<td>textblock用于显示少量文本内容，可用来展示提示。textbox用于获取文本内容，可用来获取额外参数。当type为textblock时，有以下属性：text：显示的提示文本。</td>
+</tr>
+</tbody>
+</table>
+<p>那么，接下来就可以自行配置了。</p>
+<p>ChangeThePosition.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;Views&gt; 
+  &lt;View type=&quot;textblock&quot; text=&quot;改变前数字：&quot;/&gt; 
+  &lt;View type=&quot;textbox&quot;/&gt; 
+  &lt;View type=&quot;textblock&quot; text=&quot;改变后数字：&quot;/&gt; 
+  &lt;View type=&quot;textbox&quot;/&gt; 
+&lt;/Views&gt;
+</code></pre>
+<p>此时，保存ChangeThePosition.xml文件(保存的编码为UTF-8)，重新点击<img src="https://firebasestorage.googleapis.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-LU-oxMWYc64m9DG-B71%2F-LcLY_qIE_2mP9_ccRA2%2F-LcLoj3NMZow3kRvqGsE%2Fsetup.png?alt=media&amp;token=a90707e0-a847-49a9-b59d-d4131b7378ab" alt="img">(安装编辑插件)，拖动到合适的步骤上，如下图：</p>
+<p><img src="https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-LU-oxMWYc64m9DG-B71%2F-LcLY_qIE_2mP9_ccRA2%2F-LcM0Q0veFwW5cZT0v5V%2F%E6%97%A0%E6%A0%87%E9%A2%98DDD.png?alt=media&amp;token=982b6cc6-a24c-462d-a46a-12b664ee446b" alt="img"></p>
+<h1>三、编写dll文件</h1>
+<p>以下以Visual Studio 2017：</p>
+<h2>①文件-新建-项目-类库</h2>
+<p><img src="https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-LU-oxMWYc64m9DG-B71%2F-LcOW2XozwBtOGEXuqbD%2F-LcOX1wv9ce78Wl_L6I0%2FQQ%E6%88%AA%E5%9B%BE20190414094803.png?alt=media&amp;token=b6b5f655-18f7-470f-a769-75a257f8172f" alt="img"></p>
+<p>该名称不做限制(但推荐有标识性)</p>
+<h2>②修改项目名/类名</h2>
+<p>找到右侧-解决方案资源管理器，修改项目名：图中选中的sample可以不用更改，</p>
+<p><img src="https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-LU-oxMWYc64m9DG-B71%2F-LcOW2XozwBtOGEXuqbD%2F-LcOXgGvbWh_4yCvShBA%2FQQ%E6%88%AA%E5%9B%BE20190414095001.png?alt=media&amp;token=b5927e26-2e85-408c-8ced-0463b0bceea9" alt="img"></p>
+<p>而Class1则是需要修改为安装文件Name属性的值即ChangeThePosition。</p>
+<p>setup.xml</p>
+<pre><code>&lt;Name&gt;ChangeThePosition&lt;/Name&gt;
+</code></pre>
+<p><img src="https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-LU-oxMWYc64m9DG-B71%2F-LcOW2XozwBtOGEXuqbD%2F-LcOYbE3p0zLgfK0XH64%2FQQ%E6%88%AA%E5%9B%BE20190414095417.png?alt=media&amp;token=f0e499d9-1e0c-4aaa-b7c9-d583e8139e6d" alt="img"></p>
+<h2>③右键引用-添加引用</h2>
+<p><img src="https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-LU-oxMWYc64m9DG-B71%2F-LcOW2XozwBtOGEXuqbD%2F-LcO_p3FqqBf6uMCcoWD%2FQQ%E6%88%AA%E5%9B%BE20190414100237.png?alt=media&amp;token=c0b80142-8496-466e-ab2f-2fd87fc17545" alt="img"></p>
+<p>在弹出的对话框中，选择-软件根目录Operation.dll文件</p>
+<p><img src="https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-LU-oxMWYc64m9DG-B71%2F-LcOW2XozwBtOGEXuqbD%2F-LcO_1KgjRnO3WN31iRr%2FQQ%E6%88%AA%E5%9B%BE20190414100037.png?alt=media&amp;token=e872bada-4d80-41e2-a4d0-ce52d9fb9939" alt="img"></p>
+<h2>④继承IGetOperationResult并实现IGetOperationResult接口中的方法</h2>
+<pre><code>using Operation;
+using System;
+using System.Collections.Generic;
+
+namespace sample
+{
+    public class ChangeThePosition : IGetOperationResult
+    {
+        public List&lt;Light&gt; GetOperationResult(List&lt;Light&gt; lightGroup, List&lt;string&gt; parameters)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
+</code></pre>
+<h2>⑤根据需求操作传入的lightGroup灯光数组并返回(此步骤可以参考最后的附件sample.rar，代码也拷贝至文档最后)。</h2>
+<h2>⑥将生成模式改为Release并生成sample.dll。</h2>
+<p><img src="https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-LU-oxMWYc64m9DG-B71%2F-LcOW2XozwBtOGEXuqbD%2F-LcOazGa79oYs8zNh5me%2FQQ%E6%88%AA%E5%9B%BE20190414100954.png?alt=media&amp;token=d221615d-f14b-4ec9-b154-516749777492" alt="img"></p>
+<h2>⑦将sample.dll拷贝至最初新建的文件夹下(无需拷贝Operation.dll)</h2>
+<p><img src="https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-LU-oxMWYc64m9DG-B71%2F-LcOW2XozwBtOGEXuqbD%2F-LcObV-nXKsYqyWcozEi%2FQQ%E6%88%AA%E5%9B%BE20190414101205.png?alt=media&amp;token=81ba827b-434d-48cf-a0b3-7501222a0a77" alt="img"></p>
+<h2>⑧ 查看结果</h2>
+<p><img src="https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-LU-oxMWYc64m9DG-B71%2F-LcP6WvYCiA6euNhU4Kb%2F-LcP6aE5hhPyrHnEufAb%2Fddd.png?alt=media&amp;token=0032f0fa-7df9-4835-89fb-cea5a76abcb9" alt="img"></p>
+<p>至此编辑方法就已扩展成功。</p>
+<p>仍有疑问可进Q群586779832进行询问。</p>
+<h1>附录</h1>
+<h2>示例压缩包</h2>
+<p>sample.rar</p>
+<p>sample.rar - 216KB</p>
+<h2>附交换位置的dll代码：</h2>
+<pre><code>using Operation;
+using System;
+using System.Collections.Generic;
+namespace sample
+{
+    //必须要与清单文件name属性对应,且必须继承IGetOperationResult接口
+    public class ChangeThePosition : IGetOperationResult
+    {
+        //实现IGetOperationResult接口中的方法
+        public List&lt;Light&gt; GetOperationResult(List&lt;Light&gt; lightGroup, String parameter)
+        {
+            //lightGroup - 灯光对象数组
+            //Light 有四个属性,分别为:Time - 时间,Action - 行为(144开,128关),Position - 位置,Color - 颜色
+            //Light 有两个构造函数，分别为无参构造 new Light();
+            //                          和四属性构造 new Light(int time,int action,int position,int color);
+            //parameter - 传入的参数为参数1,参数2,参数N,如无需参数，则传入的参数为空字符串
+            //根据逗号分割
+            String[] parameters = parameter.Split(',');
+            //以下根据自己的意图操作
+            if (parameters.Length != 2) {
+                // 判断参数个数是否正确 如果不正确返回空
+                return null;
+            }
+            if (!int.TryParse(parameters[0], out int beforeNumber)) {
+                //转换失败返回空
+                return null;
+            }
+            if (!int.TryParse(parameters[1], out int afterNumber))
+            {
+                //转换失败返回空
+                return null;
+            }
+            //遍历集合
+            for (int k = 0; k &lt; lightGroup.Count; k++)
+            {
+                //如果位置等于前数字
+                if(lightGroup[k].Position == beforeNumber) {
+                    //那么就改变位置
+                    lightGroup[k].Position = afterNumber;
+                }
+            }
+            //返回结果
+            return lightGroup;
+        }
+    }
+}
+</code></pre>
+</div></section><footer class="footer-container"><div class="footer-body"><img src="/img/dubbo_gray.png"/><div class="cols-container"><div class="col col-12"><h3>免责声明</h3><p>免责声明的具体内容</p></div><div class="col col-6"><dl><dt>文档</dt><dd><a href="/zh-cn/docs/demo1.html" target="_self">概览</a></dd><dd><a href="/zh-cn/docs/demo2.html" target="_self">快速开始</a></dd><dd><a href="/zh-cn/docs/dir/demo3.html" target="_self">开发者指南</a></dd></dl></div><div class="col col-6"><dl><dt>资源</dt><dd><a href="/zh-cn/blog/index.html" target="_self">博客</a></dd><dd><a href="/zh-cn/community/index.html" target="_self">社区</a></dd></dl></div></div><div class="copyright"><span>Copyright © 2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span></div></div></footer></div></div>
+	<script src="https://f.alicdn.com/react/15.4.1/react-with-addons.min.js"></script>
+	<script src="https://f.alicdn.com/react/15.4.1/react-dom.min.js"></script>
+	<script>
+		window.rootPath = '';
+  </script>
+	<script src="/build/documentation.js"></script>
+</body>
+</html>

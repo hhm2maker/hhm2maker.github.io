@@ -1,0 +1,10 @@
+{
+  "filename": "CSharp规范.md",
+  "__html": "<h2>T? 和 TryParse</h2>\n<ul>\n<li>鼠标放入确定按钮时判断两个文本框是否正确（即统一处理时）​<code>if(int.TryParse(tb1.Text, out num1) &amp;&amp; int.TryParse(tb2.Text, out num2)) { //... }​</code></li>\n<li>按钮按下时，鼠标焦点要跳转到数据错误的文本框时（即分开处理时）[错误]<code>if(int.TryParse(tb1.Text, out num1)) { //文本框1出现问题时 //... if(int.TryParse(tb2.Text, out num2)) { \t//文本框2出现问题时 \t//... } } ​</code>\n这样的代码是不宜读的，因为这两个条件应该是平级的。</li>\n<li>按钮按下时，鼠标焦点要跳转到数据错误的文本框时（即分开处理时）[正确]<code>//公共方法 static int? TryParse(String text) { //int num; if(int.TryParse(text,out num) { \treturn num; } else { \treturn null; } } //调用 int? num1 = TryParse(tb1.Text); if(num1 != null) { //文本框1出现问题时 //... } int? num2 = TryParse(tb2.Text); if(num2 != null) { //文本框2出现问题时 //... }</code>\n这样的代码还有一个好处，变量的作用域扩大了。</li>\n</ul>\n<h2>空合并操作符</h2>\n<pre><code>int? a = 5;\nint b = 10;\nint c = a ?? b;\n//当a不等于空是c = a，反之c = b; ```\n这样会使代码的易读性变差，所以请勿大量连续使用（或配合注释使用）\n\n\n# 忽略委托参数\n\n</code></pre>\n<p>button.Click += delegate{Console.WriteLine(&quot;Click&quot;);};```</p>\n",
+  "link": "\\zh-cn\\blog\\CSharp规范.html",
+  "meta": {
+    "title": "C#规范",
+    "date": "2019-08-05 09:23:00",
+    "categories": "[CSharp]"
+  }
+}

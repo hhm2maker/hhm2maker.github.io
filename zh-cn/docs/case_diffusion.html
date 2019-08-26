@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="keywords" content="case_diffusion" />
+	<meta name="description" content="case_diffusion" />
+	<!-- 网页标签标题 -->
+	<title>case_diffusion</title>
+	<link rel="shortcut icon" href="/img/docsite.ico"/>
+	<link rel="stylesheet" href="/build/documentation.css" />
+</head>
+<body>
+	<div id="root"><div class="documentation-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="/img/dubbo_colorful.png"/></a><div class="search search-normal"><span class="icon-search"></span></div><span class="language-switch language-switch-normal">En</span><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/><ul><li class="menu-item menu-item-normal"><a href="/zh-cn/index.html" target="_self">首页</a></li><li class="menu-item menu-item-normal menu-item-normal-active"><a href="/zh-cn/docs/install.html" target="_self">文档</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/blog/index.html" target="_self">博客</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/community/index.html" target="_self">社区</a></li></ul></div></div></header><div class="bar"><div class="bar-body"><img src="/img/system/docs.png" class="front-img"/><span>文档</span><img src="/img/system/docs.png" class="back-img"/></div></div><section class="content-section"><div class="sidemenu"><div class="sidemenu-toggle"><img src="https://img.alicdn.com/tfs/TB1E6apXHGYBuNjy0FoXXciBFXa-200-200.png"/></div><ul><li class="menu-item menu-item-level-1"><span>准备开始</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/install.html" target="_self">安装</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/file.html" target="_self">文件</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/update.html" target="_self">更新</a></li></ul></li><li class="menu-item menu-item-level-1"><span>灯光语句</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/lightscript_concept.html" target="_self">概念</a></li><li style="height:108px;overflow:hidden" class="menu-item menu-item-level-2"><span>实例<img style="transform:rotate(0deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/case_diffusion.html" target="_self">左下角至右上角的扩散</a></li><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/case_blockmoving.html" target="_self">方块移动</a></li></ul></li><li style="height:72px;overflow:hidden" class="menu-item menu-item-level-2"><span>自定义编辑方法<img style="transform:rotate(0deg)" class="menu-toggle" src="/img/system/arrow_down.png"/></span><ul><li class="menu-item menu-item-level-3"><a href="/zh-cn/docs/single_editing_method.html" target="_self">单编辑方法</a></li></ul></li></ul></li><li class="menu-item menu-item-level-1"><span>博客系统</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/blog_concept.html" target="_self">概念</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/creating_blog_interface.html" target="_self">创建博客界面</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/writing_blog_logic.html" target="_self">编写博客逻辑</a></li></ul></li><li class="menu-item menu-item-level-1"><span>错误</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/error_1.html" target="_self">System.InvalidOperationException</a></li></ul></li><li class="menu-item menu-item-level-1"><span>附件</span><ul><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/document.html" target="_self">文档</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/position.html" target="_self">位置表</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/color.html" target="_self">颜色表</a></li><li style="height:36px;overflow:hidden" class="menu-item menu-item-level-2"><a href="/zh-cn/docs/money.html" target="_self">开销</a></li></ul></li></ul></div><div class="doc-content markdown-body"><h1>左下角至右上角的扩散</h1>
+<p>那么，有了一个想法，我们得先分析怎么做才是最好的。(每个人对于同一个灯光都有自己觉得最优的画法，所以也不用拘泥于本文档制作的思路)</p>
+<p>我们首先把pad划分成四个区域：左下左上右下右上，那么最先出现的是左下角。</p>
+<p>对于左下角，从最下面一排设想，第一秒出现的是11，之后是12、13、14，这么一个运动过程。</p>
+<p><img src="./img/case_diffusion_1.png" alt=""></p>
+<p>那么，我们就可以开始制作最后一排了。</p>
+<p><strong>快速生成》</strong></p>
+<ul>
+<li>时间：0(从第0帧开始)，</li>
+<li>范围：11-14(如图)，</li>
+<li>间隔：12(范围之间间隔时间，如果间隔为0，那么范围内的格子会同时亮起)，</li>
+<li>持续：12(根据BPM，在96BPM下，持续时间等于12/96[八分之一秒])，</li>
+<li>颜色：5(制作框架的时候通常选择最基础鲜艳的颜色，也便于观察)，</li>
+<li>类型：上(暂时用不上其他的)。</li>
+</ul>
+<p><strong>按下“添加”或“选中”。</strong></p>
+<p>那么我们就做好了第一排，此时步骤栏会多出Step1(步骤1)。</p>
+<p>接下来，我们要思考第一排和第二排是否有关联(是否可以通过修改第一排某些数值来得到第二排)。</p>
+<p>得到的结果是，第二排的时间比第一排时间迟一格(即相差了一格的间隔，如上面则是间隔了12)，位置同比相差10。</p>
+<p>那么，我们可以通过：</p>
+<ol>
+<li>先选中上面生成的Step1(如果生成时按下的是“选中”，那么可以跳过此步骤)，</li>
+<li><strong>选中编辑》</strong>
+<ol>
+<li>时间：+12，位置：+10。</li>
+<li>按下“添加”。</li>
+</ol>
+</li>
+</ol>
+<p>此时会得到且选中第二排(Step2)。</p>
+<p>第三排和第四排之间的关系与之前相同，所以只需要继续按2次“添加”即可获得左下区四排，完成了一个(准)小框架。</p>
+<p>分析时也应该想到，4个区域的运动都是一样的，只是时间不同。那么我们就可以复用刚刚做好的(准)小框架。</p>
+<p>为什么说是带准字的？因为这个小框架并没有变成一个整体，所以我们先要把它变为一个整体：</p>
+<ol>
+<li>取消Step 2.3.4的父类关系，步骤右键-取消父类关系，</li>
+<li>选中四个步骤(按住Ctrl挨个点，或者选中头按住Shift再选中尾)-合并。</li>
+</ol>
+<p>那么，这时候(准)小框架就变成了小框架。</p>
+<p>接下来，我们就接着做左上角。左上角与左下角的关系为时间隔了4格，位置隔了40。</p>
+<p>那么我们就：</p>
+<ol>
+<li>选中小框架，</li>
+<li><strong>选中编辑》</strong>
+<ol>
+<li>时间：+48(4*12)，位置：+40。</li>
+<li>按下“添加”。</li>
+</ol>
+</li>
+</ol>
+<p>得到了左上角。</p>
+<p>右下角可由左下角变化：</p>
+<ul>
+<li>时间：+48，位置：+4。</li>
+</ul>
+<p>右下角也可以由左上角变化：</p>
+<ul>
+<li>时间：+0(也可空)，位置：-36。</li>
+</ul>
+<p>右上角可以通过三种方式变化得到，文档中只说明其中一种。</p>
+<ol>
+<li>选中右下角，</li>
+<li>时间：+48，位置：+40。</li>
+</ol>
+<p>合并四个区域。</p>
+<p>那么至此，左下角至右上角的扩散的框架就搭建好了。</p>
+<h1>附：框架变成彩虹灯的扩散。</h1>
+<p>选中完成的框架，菜单栏-编辑-叠加-颜色叠加(跟随)，</p>
+<p>在弹出的对话框中输入：5 (空格)9 13 17 33 37 45 49 53</p>
+<p>然后点击“确定”即可获得「成品」彩虹色的左上到右上扩散。</p>
+</div></section><footer class="footer-container"><div class="footer-body"><img src="/img/dubbo_gray.png"/><div class="cols-container"><div class="col col-12"><h3>免责声明</h3><p>免责声明的具体内容</p></div><div class="col col-6"><dl><dt>文档</dt><dd><a href="/zh-cn/docs/install.html" target="_self">概览</a></dd><dd><a href="/zh-cn/docs/install.html" target="_self">快速开始</a></dd><dd><a href="/zh-cn/docs/dir/demo3.html" target="_self">开发者指南</a></dd></dl></div><div class="col col-6"><dl><dt>资源</dt><dd><a href="/zh-cn/blog/index.html" target="_self">博客</a></dd><dd><a href="/zh-cn/community/index.html" target="_self">社区</a></dd></dl></div></div><div class="copyright"><span>Copyright © 2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span></div></div></footer></div></div>
+	<script src="https://f.alicdn.com/react/15.4.1/react-with-addons.min.js"></script>
+	<script src="https://f.alicdn.com/react/15.4.1/react-dom.min.js"></script>
+	<script>
+		window.rootPath = '';
+  </script>
+	<script src="/build/documentation.js"></script>
+</body>
+</html>

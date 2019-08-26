@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="keywords" content="CSharp笔记" />
+	<meta name="description" content="CSharp笔记" />
+	<!-- 网页标签标题 -->
+	<title>C#笔记</title>
+	<link rel="shortcut icon" href="/img/docsite.ico"/>
+	<link rel="stylesheet" href="/build/blogDetail.css" />
+</head>
+<body>
+	<div id="root"><div class="blog-detail-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="/img/dubbo_colorful.png"/></a><div class="search search-normal"><span class="icon-search"></span></div><span class="language-switch language-switch-normal">En</span><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/><ul><li class="menu-item menu-item-normal"><a href="/zh-cn/index.html" target="_self">首页</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/demo1.html" target="_self">文档</a></li><li class="menu-item menu-item-normal menu-item-normal-active"><a href="/zh-cn/blog/index.html" target="_self">博客</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/community/index.html" target="_self">社区</a></li></ul></div></div></header><section class="blog-content markdown-body"><h2>静态构造函数</h2>
+<p>静态构造函数不能显示调用，它会在类的任何实例被创建之前、类的任何静态成员被引用之前调用。
+静态构造函数不能访问所在类的实例成员(但可以访问静态成员)，因此也不能使用this访问器。</p>
+<pre><code>Class Class1
+{
+	static Class1 ()
+	{
+		//...
+	}
+	//...
+}```
+
+
+## 对象创建可以省略参数
+
+</code></pre>
+<p>new Point(5,6);
+//以下两种{}里面是在初始化实例里时做赋值，且仅能做赋值操作。
+new Point(){X = 5,Y = 6};
+new Point{X = 5,Y = 6};```
+以上创建的对象并无区别，但要注意的是，第一种是通过带参构造函数赋值的；其余两种是通过直接对对象字段赋值的，即修饰符必须是public。
+假设Point还有一个公共字段为Z，但是没有带参的构造函数
+public Point(int X,int Y,int Z){//...};
+那么就不可以用new Point(5,6,7);而是改用new Point(5,6){Z = 7};或是new Point{X = 5,Y = 6,Z = 7}; 后者的代码会更加的清晰。</p>
+<h2>const和readonly</h2>
+<p>简单来说readonly可以修饰实例字段，而const仅能修饰静态字段。
+基于以上原理，被readonly修饰的字段可以在之后赋值，当然同样是只能赋一次值。</p>
+<pre><code>Class Shape{
+	readonly double PI = 3.1416; //已初始化
+	readonly int    Number; //未初始化
+
+	public Shape()
+	{
+		PI = 0;//错误
+		Number = 1;//正确
+	}
+}```
+
+
+## 索引器
+
+对象可以包含索引器，索引器不能包括静态字段。
+索引器可以返回指定格式的内容，具体如下：
+</code></pre>
+<p>public Class MyString{
+public string str1;
+public string str2;
+public string str3;</p>
+<pre><code>public string this [int index]
+{
+	set
+	{
+		switch(index){
+			case 0: str1 = value;
+				break;
+			case 1: str2 = value;
+				break;
+			case 2: str3 = value;
+				break;	
+			default:
+				throw new ArgumentOutOfRangeException(&quot;index&quot;);//超出范围抛异常
+		}
+	}
+	get
+	{
+		switch(index){
+			case 0: return str1;
+				break;
+			case 1: return str2;
+				break;
+			case 2: return str3;
+				break;	
+			default:
+				throw new ArgumentOutOfRangeException(&quot;index&quot;);//超出范围抛异常
+		}
+	}
+}
+</code></pre>
+<p>}
+//调用
+MyString myString = new MyString;
+myString[0] = &quot;Hello&quot;;
+string firstStirng = myString[0];```</p>
+<p>索引器是可以重载的，如下：</p>
+<pre><code>class MyClass
+{
+	public string this [int index]
+	{
+		get{//...}
+		set{//...}
+	}
+	
+	public string this [int index,int index2]
+	{
+		get{//...}
+		set{//...}
+	}
+	
+	public int this [float index]
+	{
+		get{//...}
+		set{//...}
+	}
+}```
+
+
+## 访问器修饰符
+
+* 仅当成员(属性/索引器) 既有get也有set访问器时，可以添加访问修饰符（private等）
+* get/set访问器只能有一个有访问修饰符
+* 访问器的访问修饰符必须比成员的访问级别有更严格的限制性（即成员是public的，访问器可以设置为private，反之则不行)
+限制性层次：public - protected internal - private
+
+此作用常用于构造函数调用时更改成员值，而外部只能获取值不能修改值。
+</code></pre>
+<p>public Person
+{
+public string Name{get; private set;}
+public Person(string name){
+Name = name;
+}
+}
+//调用
+Person p = new Person(&quot;Test&quot;);
+Console.WriteLine(<a href="http://p.Name">p.Name</a>);</p>
+<pre><code>
+
+## 基类
+
+### 屏蔽基类成员
+
+</code></pre>
+<p>class SomeClass
+{
+public string MyStr;
+}</p>
+<p>class OtherClass : SomeClass
+{
+new Public string MyStr;
+}```</p>
+<h3>访问基类</h3>
+<p>可以通过 <a href="http://base.XXX">base.XXX</a> 来访问</p>
+<pre><code>Console.WriteLine(base.MyStr);```
+
+### 覆写方法
+
+基类方法修饰符：virtual
+派生类方法修饰符:override
+</code></pre>
+<p>class MyBaseClass
+{
+virtual public void Print(){
+...
+}
+}</p>
+<p>class MyDerivedClass : MyBaseClass
+{
+override public void Print(){
+...
+}
+}```</p>
+<h3>构造函数初始化语句</h3>
+<pre><code>public MyDerivedClass(int x,string s) : base(x,s){//...}
+public MyDerivedClass(int x,string s) : this(x,s){//...}```
+以上两种形式是语义等价的。
+也可以设置自定义的值
+</code></pre>
+<p>public MyDerivedClass(int x) : base(x,&quot;Hello World&quot;){//...}```</p>
+<h3>成员的可访问性</h3>
+<style>
+table th:first-of-type {
+	width: 100px;
+}
+</style>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>可访问性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>public</td>
+<td>程序集内外都可以访问。</td>
+</tr>
+<tr>
+<td>private</td>
+<td>只能被它自己的类的成员访问；不能被其他的类访问，包括继承它的类。</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>如同private访问级别，但它允许派生自该类的类访问该成员（即使程序集外部继承该类的类也能访问该成员）。</td>
+</tr>
+<tr>
+<td>internale</td>
+<td>成员对程序集内部的所有类可见，但对程序集外部的类不可见。</td>
+</tr>
+<tr>
+<td>protected internal</td>
+<td>成员对所有集成该类的类以及所有程序集内部的类可见。注意这是 protected 和 internal 的并集，不是交集。</td>
+</tr>
+</tbody>
+</table>
+<h3>抽象成员</h3>
+<p>抽象成员必须是函数成员，即字段和常亮不能，但方法、属性、时间、索引是可以的。</p>
+<pre><code>abstract public void PrintStuff(string s);//分号替换实现
+
+abstract public int MyProperty//属性是可以抽象的
+{
+	get;//分号替换实现
+	set;//分号替换实现
+}```
+
+### 虚成员 和 抽象成员
+
+ |虚成员 |  抽象成员  
+- | - | -
+关键字 | virtual | abstract 
+实现体 | 有实现体 |没有实现体，被分号取代
+在派生类中被覆写 | 能被覆写，使用override | 必须被覆写，使用override
+成员的类型 | 方法、属性、事件、索引器 | 一样 
+
+### 抽象类可以有普通方法
+
+</code></pre>
+<p>abstract class AbClass
+{
+public void IdentifyBase()
+{//...}
+}</p>
+<p>class DerivedClass : AbClass
+{
+//...
+}
+//调用
+DerivedClass dc = new DerivedClass();
+dc.IdentifyBase();//可行```</p>
+<h2>密封类</h2>
+<ul>
+<li>密封类只能被用作独立的类，它不能被用作基类。</li>
+<li>密封类使用sealed修饰符标注。</li>
+</ul>
+<pre><code>sealed class MyClass
+{
+	//...
+}```
+
+
+## 静态类
+
+* 所有成员都是静态的
+* 静态类常见的用途：创建一个包含一组数学方法和值的数学库
+* 类本身必须标记为static
+* 类的所有成员必须是静态的
+* 类可以有一个静态构造函数，但不能有实例构造函数，不能创建该类的实例
+* 静态类是隐式密封的，也就是说，不能继承静态类
+
+## 扩展方法
+
+扩展方法允许编写的方法和声明它的类之外的类关联
+* 声明扩展方法的类必须声明为static
+* 扩展方法本身必须声明为static
+* 扩展方法必须包含关键字this作为它的第一个参数类型，并在后面跟着它所扩展的类的名称
+
+</code></pre>
+<p>sealed class MyData
+{
+private double D1,D2,D3;
+public MyData(double d1,double d2,double d3)
+{D1 = d1;D2 = d2;D3 = d3;}</p>
+<pre><code>public double Sum(){return D1 + D2 + D3;}
+</code></pre>
+<p>}</p>
+<p>static class ExtendMyData
+{
+//声明为静态的
+public static double Average(this MyData md)
+{
+return md.Sum() / 3;
+}
+}
+//调用
+MyData md = new MyData(3,4,5);
+Console.WriteLine(md.Sum());
+Console.WriteLine(md.Average());```</p>
+<h2>命名约定</h2>
+<table>
+<thead>
+<tr>
+<th>风格名称</th>
+<th>描述</th>
+<th>推荐使用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pascal大小写</td>
+<td>标识符中每个单词的首字母大写</td>
+<td>用于类型名称和类中对外可见成员的名称。涉及的名称包括：类、方法、命名空间、属性和公共字段</td>
+<td>CardDeck、Dealershand</td>
+</tr>
+<tr>
+<td>Camel大小写</td>
+<td>标识符中每个单词的首字母大写，第一个单词除外</td>
+<td>用于局部变量的名称和方法声明的形参名称</td>
+<td>totalCycleCount、randomSeedParam</td>
+</tr>
+<tr>
+<td>下划线加Camel大小写</td>
+<td>以下划线开头的Camel大小的标识符</td>
+<td>用于私有和受保护的字段</td>
+<td>_cycleCount、_selectedIndex</td>
+</tr>
+</tbody>
+</table>
+<h2>逻辑运算符</h2>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&amp;</td>
+<td>位与</td>
+<td>仅当两个操作位都是1时结果位才是1</td>
+</tr>
+<tr>
+<td></td>
+<td>位或</td>
+<td>只要任意一个操作位为1时结果位就是1</td>
+</tr>
+<tr>
+<td>^</td>
+<td>位异或</td>
+<td>仅当一个而不是两个操作数为1时结果位为1</td>
+</tr>
+<tr>
+<td>~</td>
+<td>位非</td>
+<td>操作数的每一位都取反。该操作得到操作数的二进制反码（也就是说，每个0都变成1，每个1都变成0。）</td>
+</tr>
+</tbody>
+</table>
+<h2>移位运算符</h2>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;&lt;</td>
+<td>左移</td>
+<td>将位组向左移动给定数目个位置。位从左边移除并丢失。右边打开的位位置用0填充</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>右移</td>
+<td>将位组向右移动给定数目个位置。位从右边移除并丢失</td>
+</tr>
+</tbody>
+</table>
+<h2>条件运算符</h2>
+<p>单行格式：</p>
+<pre><code>intVar = x &lt; y ? 5 : 10 ;```
+
+易读格式：
+</code></pre>
+<p>intVar = x &lt; y
+? 5
+: 10 ;```</p>
+<h2>用户定义的类型转换</h2>
+<pre><code>//隐式
+        必须                     目标类型           源数据
+public static implicit operator TargetType (SourceType Identifier)
+{
+	//...
+	return ObjectOfTargetType;
+}
+
+//显式 用explicit替换implicit
+
+class LimitedInt
+{
+	//将LimitedInt转换为int
+	public static implicit operator int (LimitedInt li)
+	{
+		return li.TheValue;
+	}
+	
+	//将int转换为LimitedInt
+	public static implicit operator LimitedInt (int x)
+	{
+		LimitedInt li = new LimitedInt();
+		li.TheValue = x;
+		return li;
+	}
+	
+	private int _theVlaue = 0;
+	public int TheValue{ //... }
+}
+//调用
+LimitedInt li = 500;
+int value = li;
+//如果是 explicit(强制转换)
+LimitedInt li = (LimitedInt)500;
+int value = (int)li; ```
+
+
+## 运算符重载
+
+</code></pre>
+<p>class LimitedInt Return
+{
+必须的		 类型	  关键字   运算符              操作数
+-------------   ------    ------  	---            --------------
+public static LimitedInt operator    +        (LimitedInt x, double y)
+{
+LimitedInt li = new LimitedInt();
+li.TheValue = x.TheValue + (int)y;
+return li;
+}</p>
+<pre><code>public static LimitedInt - (LimitedInt x)
+{
+	//在这个奇怪的类中，取一个值的负数等于0
+	LimitedInt li = new LimitedInt();
+	li.TheValue = 0;
+	return li;
+}
+</code></pre>
+<p>} ```</p>
+<h2>using语句</h2>
+<pre><code>using( ResourceType Identifier = Expression) Statement
+        ----------------------------------     ----
+		            分配资源                  使用资源
+					
+using( TextWriter tw = File.CreateText(&quot;Lincoln.txt&quot;))
+{
+	tw.WriteLine(&quot;写入XX语句&quot;);
+}
+
+//可以嵌套使用
+
+//场景1
+using( ResourceType Id1 = Expr1 , Id2 = Expr2 , ...) EmbeddedStatement
+          
+using( TextWriter tw1 = File.CreateText(&quot;Lincoln.txt&quot;),
+				  tw2 = File.CreateText(&quot;Franklin.txt&quot;))
+{
+	tw1.WriteLine(&quot;写入XX语句到文件1&quot;);
+	tw2.WriteLine(&quot;写入XX语句到文件2&quot;);
+}
+
+//场景2
+using( TextWriter tw = File.CreateText(&quot;Lincoln.txt&quot;))
+{
+	tw.WriteLine(&quot;写入XX语句&quot;);
+	
+	using( TextWriter tw2 = File.CreateText(&quot;Franklin.txt&quot;))
+	{
+		tw2.WriteLine(&quot;写入XX语句&quot;);
+	}
+}
+
+
+//另一种形式的using - 不推荐
+using( Expression) EmbeddedStatement
+		------
+		 资源
+
+TextWriter tw = File.CreateText(&quot;Lincoln.txt&quot;);
+using( tw )
+{
+	tw.WriteLine(&quot;写入XX语句&quot;);	 
+}
+tw.WriteLine(&quot;...&quot;);//运行时会报错，因为已经释放了
+
+综上，它也会对资源释放，释放后会导致不一致的状态。因此它提供了较少的保护，所以不推荐使用 ```
+       
+
+## 枚举
+
+在默认情况情况下，编译器把第一个成员赋值为0，并对每一个后续成员赋的值比前一个成员多一。
+
+</code></pre>
+<p>enum FaceCards
+{
+Jack            = 11, // 11 显式设置
+Queen,                // 12 比之前的大1
+King,                 // 13 比之前的大1
+Num             = 4,  // 4  显式设置.
+Num2,                 // 5  比之前的大1
+Num3            = Num // 14 以上定义了Num
+} ```</p>
+<h2>数组</h2>
+<h3>Clone浅复制</h3>
+<p>对于值类型数组和引用类型数组，都只复制元素，不会复制元素引用的对象。</p>
+<h2>委托</h2>
+<h3>匿名函数</h3>
+<h4>params参数</h4>
+<p>如果委托声明的参数列表包含了params参数，那么匿名方法的参数列表将忽略params关键字</p>
+<pre><code>delegate void SomeDel(int x,params int[] y);
+
+SomeDel mDel = delegate(int x int[] y){
+	//...
+}; ```
+
+
+## 事件
+   
+	   关键字    委托类型     事件名
+       -----     -------     --------
+public event  EventHandler CountedADozen;
+
+
+## 接口
+
+### 显式接口成员实现
+
+</code></pre>
+<p>class MyClass : IIfc1,IIfc2
+{
+void IIfc1.PrintOut(string s)
+{
+//...
+}</p>
+<pre><code>void IIfc2.PrintOut(string s)
+{
+	//...
+}
+</code></pre>
+<p>} ```</p>
+<h3>访问显式接口成员实现</h3>
+<pre><code>class MyClass : IIfc1
+{
+	void IIfc1.PrintOut(string s)
+	{
+		console.WriteLine(&quot;IIfc1&quot;);
+	}
+	
+	public void Method1()
+	{
+		PrintOut(&quot;...&quot;);               //编译错误
+		this.PrintOut(&quot;...&quot;);          //编译错误
+		
+		((IIfc1)this).PrintOut(&quot;...&quot;); //转换为接口引用 编译成功
+	}
+} ```
+
+
+## 转换
+
+溢出检测上下文
+
+checked(表达式)
+unchecked(表达式)
+
+</code></pre>
+<p>ushort sh = 2000;
+byte sb;</p>
+<p>sb = unchecked((byte)sh); //大多数重要的位丢失了
+Console.WriteLine(sb); //结果为 208</p>
+<p>sb = checked((byte)sh); //大多数重要的位丢失了
+Console.WriteLine(sb); //抛出错误 System.OverflowException...</p>
+<p>//或者如下代码：
+byte sb;
+ushort sh = 2000;</p>
+<p>unchecked
+{
+sb = (byte)sh;
+Console.WriteLine(sb);</p>
+<pre><code>checked
+{
+	sb = (byte)sh;
+	Console.WriteLine(sb); 
+}
+</code></pre>
+<p>} ```</p>
+<h2>as is 注意点</h2>
+<p>只能用于引用转换和装箱转换，不能用于用户自定义转换或到值类型的转换。</p>
+</section><footer class="footer-container"><div class="footer-body"><img src="/img/dubbo_gray.png"/><div class="cols-container"><div class="col col-12"><h3>免责声明</h3><p>免责声明的具体内容</p></div><div class="col col-6"><dl><dt>文档</dt><dd><a href="/zh-cn/docs/demo1.html" target="_self">概览</a></dd><dd><a href="/zh-cn/docs/demo2.html" target="_self">快速开始</a></dd><dd><a href="/zh-cn/docs/dir/demo3.html" target="_self">开发者指南</a></dd></dl></div><div class="col col-6"><dl><dt>资源</dt><dd><a href="/zh-cn/blog/index.html" target="_self">博客</a></dd><dd><a href="/zh-cn/community/index.html" target="_self">社区</a></dd></dl></div></div><div class="copyright"><span>Copyright © 2018 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span></div></div></footer></div></div>
+	<script src="https://f.alicdn.com/react/15.4.1/react-with-addons.min.js"></script>
+	<script src="https://f.alicdn.com/react/15.4.1/react-dom.min.js"></script>
+	<script>
+		window.rootPath = '';
+  </script>
+	<script src="/build/blogDetail.js"></script>
+</body>
+</html>
