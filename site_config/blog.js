@@ -59,10 +59,10 @@ export default {
     postsTitle: '所有文章',
     list: [
       {
-        title: '第一篇博客',
-        author: 'author1',
-        dateStr: 'May 12nd，2018',
-        desc: '博客描述，总结博客的主体内容',
+        title: '概述',
+        author: 'hhm',
+        dateStr: '2019.08.28',
+        desc: 'Maker的概述',
         link: '/zh-cn/blog/blog1.html',
       },
       {

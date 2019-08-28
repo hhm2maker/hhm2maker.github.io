@@ -5,6 +5,7 @@ export default {
   domain: 'www.hhm2maker.com', // 站点部署域名，无需协议和path等 dubbo.apache.org
   defaultSearch: 'google', // 默认搜索引擎，baidu或者google
   defaultLanguage: 'en-us',
+  name:'aa',
   'en-us': {
     pageMenu: [
       {

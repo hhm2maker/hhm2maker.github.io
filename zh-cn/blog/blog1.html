@@ -7,13 +7,23 @@
 	<meta name="keywords" content="keywords1,keywords2,keywords3" />
 	<meta name="description" content="blog1" />
 	<!-- 网页标签标题 -->
-	<title>起源</title>
+	<!-- <title>概述</title> -->
+	<title>Maker</title>
 	<link rel="shortcut icon" href="/img/docsite.ico"/>
 	<link rel="stylesheet" href="/build/blogDetail.css" />
 </head>
 <body>
-	<div id="root"><div class="blog-detail-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="/img/dubbo_colorful.png"/></a><div class="search search-normal"><span class="icon-search"></span></div><span class="language-switch language-switch-normal">En</span><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/><ul><li class="menu-item menu-item-normal"><a href="/zh-cn/index.html" target="_self">首页</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/install.html" target="_self">文档</a></li><li class="menu-item menu-item-normal menu-item-normal-active"><a href="/zh-cn/blog/index.html" target="_self">博客</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/community/index.html" target="_self">社区</a></li></ul></div></div></header><section class="blog-content markdown-body"><h1>起源</h1>
-<h2>Live 原生控制器</h2>
+	<div id="root"><div class="blog-detail-page" data-reactroot=""><header class="header-container header-container-normal"><div class="header-body"><a href="/zh-cn/index.html"><img class="logo" src="/img/dubbo_colorful.png"/></a><div class="search search-normal"><span class="icon-search"></span></div><span class="language-switch language-switch-normal">En</span><div class="header-menu"><img class="header-menu-toggle" src="/img/system/menu_gray.png"/><ul><li class="menu-item menu-item-normal"><a href="/zh-cn/index.html" target="_self">首页</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/docs/install.html" target="_self">文档</a></li><li class="menu-item menu-item-normal menu-item-normal-active"><a href="/zh-cn/blog/index.html" target="_self">博客</a></li><li class="menu-item menu-item-normal"><a href="/zh-cn/community/index.html" target="_self">社区</a></li></ul></div></div></header><section class="blog-content markdown-body"><h1>概述</h1>
+<h2>起源</h2>
+<p>最开始Maker分为三个软件：</p>
+<ul>
+<li>编辑器 - 仅能编辑颜色</li>
+<li>创造器 - 能创建简单的Midi文件（设定时间、位置范围、持续时间、位置间隔时间、颜色），并能直接修改参数，比如时间改为X，颜色改为Y</li>
+<li>播放器 - 播放Midi文件</li>
+</ul>
+<p>三合一之后增加了很多内容，比如各种各样的编辑方法。</p>
+<h2>对比</h2>
+<h3>Live 原生控制器</h3>
 <p>当我第一次接触制作灯光的时候，制作灯光是通过叠加控制器来实现效果的，简单来说就是一个控制器来设定位置，一个控制器来设定移动的方向/方式，一个控制器来设置时间（开始时间、移动时间），这种方式对于我这个新手来说是非常复杂的，一个控制器来设置颜色。</p>
 <p>目前仍有部分制作者会使用这种方式制作灯光，熟悉工具之后是可以流畅制作灯光的，但如下几个问题仍然会存在：</p>
 <ul>
@@ -23,7 +33,7 @@
 <li>扩展性较弱</li>
 </ul>
 <p>因为难分离，会导致使用多个控制器来设定位置，导致内存占用较大。<br/>复杂性和不可预知性会导致做大型灯光无法确定效果，只能通过播放来看到实际效果。<br/>扩展性较弱则是因为大多数控制器是用来控制声音的。</p>
-<h2>MIDI灯光</h2>
+<h3>MIDI灯光</h3>
 <p>在学习的末尾，OO老师(最早我是报班学习的，是第一期学习的)有提到MIDI绘制的方式，不过因为是第一批，且这项技术出来没有多久，大多数都是靠自我摸索的（连如何保存Save文件都是我无意间摸索出来的[需要用管理员身份运行Live，才有权限在C盘某目录读写文件]）。</p>
 <p>这种方式我非常喜欢，有很多优点，但同样有部分缺陷：</p>
 <ul>
@@ -32,10 +42,10 @@
 <li>本质为逐帧/时间节点绘制，这个根本原因导致修改性很差。</li>
 <li>修改颜色不方便(这可能是因为我不太熟悉Live)</li>
 </ul>
-<h2>Maker</h2>
+<h3>Maker</h3>
 <p>功能正在一天天的完善，所以这里就不提做了什么，而是说说想做成什么样：</p>
 <ul>
-<li>免费开源</li>
+<li>免费、开源</li>
 <li>更加针对灯光（Launchpad）</li>
 <li>可视化</li>
 <li>可编辑</li>
