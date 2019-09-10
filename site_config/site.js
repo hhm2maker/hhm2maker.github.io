@@ -87,6 +87,11 @@ export default {
         text: '社区',
         link: '/zh-cn/community/index.html',
       },
+	  {
+        key: 'talk',
+        text: '交流',
+        link: '/zh-cn/talk/index.html',
+      },
     ],
     disclaimer: {
       title: '免责声明',
